@@ -37,5 +37,13 @@
     "noClue": "No clue found at this location.",
     "itemAlreadyTaken": "Something has been removed from here.",
     "itemKept": "You have kept this item."
+  },
+  "Pensieve": {
+    "title": "Pensieve",
+    "description": "The Pensieve allows you to access memories related to the case. Select a location and dive into the memory.",
+    "selectLocation": "Select a location for memories",
+    "button": "Explore Memory",
+    "noMemory": "No more memories available from this location.",
+    "memoryFrom": "Memory from"
   }
 }
