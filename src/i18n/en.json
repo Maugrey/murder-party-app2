@@ -1,6 +1,41 @@
 {
+  "App": {
+    "home": "Home",
+    "admin": "Administration",
+    "interrogate": "Interrogate",
+    "search": "Search",
+    "shop": "Shop",
+    "pensieve": "Pensieve"
+  },
   "Home": {
-    "title": "Welcome to the Murder Party!",
-    "startButton": "Start the game"
+    "title": "Murder Party",
+    "startButton": "Start Game",
+    "interrogateButton": "Interrogate",
+    "searchButton": "Search",
+    "shopButton": "Shop",
+    "pensieveButton": "Pensieve"
+  },
+  "Admin": {
+    "title": "Administration",
+    "murderPartySectionTitle": "Murder Party Admin",
+    "resetButton": "Reset",
+    "nextPhaseButton": "Next Phase",
+    "prevPhaseButton": "Previous Phase",
+    "conditionsSectionTitle": "Conditions"
+  },
+  "Timer": {
+    "totalTime": "Total Time: {{time}}",
+    "phaseTime": "Phase Time: {{time}}",
+    "phase": "Phase: {{phase}}"
+  },
+  "Search": {
+    "title": "Search",
+    "selectLocation": "Select a location",
+    "selectPlace": "Select a place to search",
+    "button": "Search",
+    "keepItem": "Keep the clue",
+    "noClue": "No clue found at this location.",
+    "itemAlreadyTaken": "Something has been removed from here.",
+    "itemKept": "You have kept this item."
   }
 }

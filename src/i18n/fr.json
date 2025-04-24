@@ -1,6 +1,41 @@
 {
+  "App": {
+    "home": "Accueil",
+    "admin": "Administration",
+    "interrogate": "Interroger",
+    "search": "Fouiller",
+    "shop": "Acheter",
+    "pensieve": "Pensine"
+  },
   "Home": {
-    "title": "Bienvenue à la Murder Party !",
-    "startButton": "Commencer la partie"
+    "title": "Murder Party",
+    "startButton": "Commencer la partie",
+    "interrogateButton": "Interroger",
+    "searchButton": "Fouiller",
+    "shopButton": "Acheter",
+    "pensieveButton": "Pensine"
+  },
+  "Admin": {
+    "title": "Administration",
+    "murderPartySectionTitle": "Murder Party Admin",
+    "resetButton": "Réinitialiser",
+    "nextPhaseButton": "Phase suivante",
+    "prevPhaseButton": "Phase précédente",
+    "conditionsSectionTitle": "Conditions"
+  },
+  "Timer": {
+    "totalTime": "Temps total : {{time}}",
+    "phaseTime": "Temps phase : {{time}}",
+    "phase": "Phase : {{phase}}"
+  },
+  "Search": {
+    "title": "Fouiller",
+    "selectLocation": "Sélectionner un lieu",
+    "selectPlace": "Sélectionner un endroit à fouiller",
+    "button": "Fouiller",
+    "keepItem": "Garder l'indice",
+    "noClue": "Aucun indice trouvé à cet endroit.",
+    "itemAlreadyTaken": "Quelque chose ici a été enlevé.",
+    "itemKept": "Vous avez gardé cet objet."
   }
 }
