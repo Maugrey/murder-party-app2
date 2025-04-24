@@ -119,6 +119,7 @@ const Interrogate = () => {
           className="p-2 border rounded"
           value={selectedLocation}
           onChange={e => { setSelectedLocation(e.target.value); setSelectedNpc(''); }}
+          title={t('Interrogate.selectLocation')}
         >
           <option value="">{t('Interrogate.selectLocation')}</option>
           {locations.map(loc => (
@@ -130,6 +131,7 @@ const Interrogate = () => {
           value={selectedNpc}
           onChange={e => setSelectedNpc(e.target.value)}
           disabled={!selectedLocation}
+          title={t('Interrogate.selectNpc')}
         >
           <option value="">{t('Interrogate.selectNpc')}</option>
           {npcs.map(npc => (

@@ -37,8 +37,8 @@ const Admin = () => {
   const handleReset = () => {
     setIsGameStarted(false);
     setCurrentPhase(1);
-    setGameStartTime(null);
-    setPhaseStartTime(null);
+    setGameStartTime(0);
+    setPhaseStartTime(0);
     setConditions({});
     useGlobalStore.getState().setCluesViewed({});
     useGlobalStore.getState().setItemsTaken({});

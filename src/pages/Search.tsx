@@ -128,6 +128,7 @@ const Search = () => {
             setSelectedLocation(e.target.value);
             setSelectedPlace('');
           }}
+          title={t('Search.selectLocation')}
         >
           <option value="">{t('Search.selectLocation')}</option>
           {locations.map(loc => (
@@ -139,6 +140,7 @@ const Search = () => {
           value={selectedPlace}
           onChange={e => setSelectedPlace(e.target.value)}
           disabled={!selectedLocation}
+          title={t('Search.selectPlace')}
         >
           <option value="">{t('Search.selectPlace')}</option>
           {places.map(place => (
