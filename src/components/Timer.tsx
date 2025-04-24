@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGlobalStore } from '../stores/globalStore';
+import { useTranslation } from 'react-i18next';
 
 function formatTime(ms: number) {
   const totalSeconds = Math.floor(ms / 1000);
@@ -9,7 +10,10 @@ function formatTime(ms: number) {
 }
 
 const Timer = () => {
+  const { t } = useTranslation();
+  const currentPhase = useGlobalStore((s) => s.currentPhase);
   const gameStartTime = useGlobalStore((s) => s.gameStartTime);
+  const phaseStartTime = useGlobalStore((s) => s.phaseStartTime);
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
@@ -17,9 +21,18 @@ const Timer = () => {
     return () => clearInterval(interval);
   }, []);
 
-  if (!gameStartTime) return <span className="text-gray-400">00:00</span>;
-  const elapsed = now - gameStartTime;
-  return <span className="font-mono text-sm">{formatTime(elapsed)}</span>;
+  const elapsedGame = gameStartTime ? now - gameStartTime : 0;
+  const elapsedPhase = phaseStartTime ? now - phaseStartTime : 0;
+
+  return (
+    <div className="flex flex-col md:flex-row gap-1 md:gap-4 items-center text-xs md:text-sm">
+      <span className="font-semibold">{t('Timer.phase')} { currentPhase }</span>
+      -
+      <span>{t('Timer.gameTimer')} <span className="font-mono">{formatTime(elapsedGame)}</span></span>
+      -
+      <span>{t('Timer.phaseTimer')} <span className="font-mono">{formatTime(elapsedPhase)}</span></span>
+    </div>
+  );
 };
 
 export default Timer;
