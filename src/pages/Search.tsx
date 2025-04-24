@@ -150,7 +150,7 @@ const Search = () => {
           disabled={!selectedLocation || !selectedPlace}
           onClick={handleSearch}
         >
-          {t('Search.button')}
+          {t('Search.searchButton')}
         </button>
       </div>
       
@@ -164,7 +164,7 @@ const Search = () => {
               className="mt-4 p-2 rounded bg-green-600 text-white hover:bg-green-700 transition"
               onClick={handleKeepItem}
             >
-              {t('Search.keepItem')}
+              {t('Search.keepItemButton')}
             </button>
           )}
         </div>

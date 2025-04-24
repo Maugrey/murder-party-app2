@@ -17,11 +17,10 @@
   },
   "Admin": {
     "title": "Administration",
-    "murderPartySectionTitle": "Admin Murder Party",
     "resetButton": "Réinitialiser",
     "nextPhaseButton": "Phase suivante",
     "prevPhaseButton": "Phase précédente",
-    "conditionsSectionTitle": "Conditions"
+    "conditionsSection": "Conditions"
   },
   "Timer": {
     "totalTime": "Temps total : {{time}}",
@@ -32,18 +31,38 @@
     "title": "Fouiller",
     "selectLocation": "Sélectionnez un lieu",
     "selectPlace": "Sélectionnez un endroit à fouiller",
-    "button": "Fouiller",
-    "keepItem": "Garder l'indice",
+    "searchButton": "Fouiller",
+    "keepItemButton": "Garder l'indice",
     "noClue": "Aucun indice trouvé à cet endroit.",
     "itemAlreadyTaken": "Quelque chose a été retiré d'ici.",
     "itemKept": "Vous avez gardé cet objet."
   },
+  "Interrogate": {
+    "title": "Interroger",
+    "selectLocation": "Sélectionnez un lieu",
+    "selectNpc": "Sélectionnez un PNJ",
+    "interrogateButton": "Interroger",
+    "alreadySeen": "Vous avez déjà obtenu tous les indices de cette personne.",
+    "noClue": "Cette personne n'a rien à vous dire."
+  },
   "Pensieve": {
     "title": "Pensine",
-    "description": "La Pensine vous permet d'accéder aux souvenirs liés à l'affaire. Sélectionnez un lieu et plongez dans le souvenir.",
-    "selectLocation": "Sélectionnez un lieu pour les souvenirs",
-    "button": "Explorer le souvenir",
-    "noMemory": "Plus aucun souvenir disponible de ce lieu.",
-    "memoryFrom": "Souvenir de"
+    "description": "La Pensine vous permet d'accéder aux souvenirs liés à l'affaire. Plongez dans la Pensine pour découvrir un souvenir aléatoire.",
+    "diveButton": "Plonger dans la Pensine",
+    "noMemory": "La pensine du professeur Reeves est vide.",
+    "clueType": "Indice",
+    "falseLeadType": "Fausse piste",
+    "uselessType": "Souvenir inutile",
+    "location": "Lieu"
+  },
+  "Shop": {
+    "title": "Boutique"
+  },
+  "Common": {
+    "on": "Activé",
+    "off": "Désactivé",
+    "notStarted": "La partie n'a pas commencé.",
+    "todo": "À faire",
+    "loading": "Chargement..."
   }
 }

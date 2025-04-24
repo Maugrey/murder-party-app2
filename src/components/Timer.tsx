@@ -26,11 +26,11 @@ const Timer = () => {
 
   return (
     <div className="flex flex-col md:flex-row gap-1 md:gap-4 items-center text-xs md:text-sm">
-      <span className="font-semibold">{t('Timer.phase')} { currentPhase }</span>
+      <span className="font-semibold">{t('Timer.phase', { phase: currentPhase })}</span>
       -
-      <span>{t('Timer.gameTimer')} <span className="font-mono">{formatTime(elapsedGame)}</span></span>
+      <span>{t('Timer.totalTime', { time: formatTime(elapsedGame) })}</span>
       -
-      <span>{t('Timer.phaseTimer')} <span className="font-mono">{formatTime(elapsedPhase)}</span></span>
+      <span>{t('Timer.phaseTime', { time: formatTime(elapsedPhase) })}</span>
     </div>
   );
 };

@@ -21,7 +21,7 @@
     "resetButton": "Reset",
     "nextPhaseButton": "Next Phase",
     "prevPhaseButton": "Previous Phase",
-    "conditionsSectionTitle": "Conditions"
+    "conditionsSection": "Conditions"
   },
   "Timer": {
     "totalTime": "Total Time: {{time}}",
@@ -32,18 +32,38 @@
     "title": "Search",
     "selectLocation": "Select a location",
     "selectPlace": "Select a place to search",
-    "button": "Search",
-    "keepItem": "Keep the clue",
+    "searchButton": "Search",
+    "keepItemButton": "Keep the clue",
     "noClue": "No clue found at this location.",
     "itemAlreadyTaken": "Something has been removed from here.",
     "itemKept": "You have kept this item."
   },
+  "Interrogate": {
+    "title": "Interrogate",
+    "selectLocation": "Select a location",
+    "selectNpc": "Select an NPC",
+    "interrogateButton": "Interrogate",
+    "alreadySeen": "You have already obtained all clues from this person.",
+    "noClue": "This person has nothing to tell you."
+  },
   "Pensieve": {
     "title": "Pensieve",
-    "description": "The Pensieve allows you to access memories related to the case. Select a location and dive into the memory.",
-    "selectLocation": "Select a location for memories",
-    "button": "Explore Memory",
-    "noMemory": "No more memories available from this location.",
-    "memoryFrom": "Memory from"
+    "description": "The Pensieve allows you to access memories related to the case. Dive into the Pensieve to discover a random memory.",
+    "diveButton": "Dive into the Pensieve",
+    "noMemory": "Professor Reeves' pensieve is empty.",
+    "clueType": "Clue",
+    "falseLeadType": "False lead",
+    "uselessType": "Useless memory",
+    "location": "Location"
+  },
+  "Shop": {
+    "title": "Shop"
+  },
+  "Common": {
+    "on": "On",
+    "off": "Off",
+    "notStarted": "The game has not started.",
+    "todo": "To do",
+    "loading": "Loading..."
   }
 }

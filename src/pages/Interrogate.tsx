@@ -141,7 +141,7 @@ const Interrogate = () => {
           disabled={!selectedLocation || !selectedNpc}
           onClick={handleInterrogate}
         >
-          {t('Interrogate.button')}
+          {t('Interrogate.interrogateButton')}
         </button>
         {alreadySeen && (
           <div className="text-yellow-600 text-sm">{t('Interrogate.alreadySeen')}</div>

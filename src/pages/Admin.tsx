@@ -59,9 +59,9 @@ const Admin = () => {
     <div className="max-w-xl mx-auto py-8">
       <h2 className="text-2xl font-bold mb-6">{t('Admin.title')}</h2>
       <div className="flex gap-4 mb-8">
-        <button className="btn bg-red-600 text-white" onClick={handleReset}>{t('Admin.reset')}</button>
-        <button className="btn" onClick={handlePrevPhase}>{t('Admin.prevPhase')}</button>
-        <button className="btn" onClick={handleNextPhase}>{t('Admin.nextPhase')}</button>
+        <button className="btn bg-red-600 text-white" onClick={handleReset}>{t('Admin.resetButton')}</button>
+        <button className="btn" onClick={handlePrevPhase}>{t('Admin.prevPhaseButton')}</button>
+        <button className="btn" onClick={handleNextPhase}>{t('Admin.nextPhaseButton')}</button>
       </div>
       <div className="mb-6">
         <h3 className="font-semibold mb-2">{t('Admin.conditionsSection')}</h3>

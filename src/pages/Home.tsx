@@ -30,10 +30,10 @@ const Home = () => {
         </button>
       ) : (
         <div className="flex flex-col gap-4 w-full max-w-xs">
-          <button className="btn" onClick={() => navigate('/interrogate')}>{t('Home.interrogate')}</button>
-          <button className="btn" onClick={() => navigate('/search')}>{t('Home.search')}</button>
-          <button className="btn" onClick={() => navigate('/shop')}>{t('Home.shop')}</button>
-          <button className="btn" onClick={() => navigate('/pensieve')}>{t('Home.pensieve')}</button>
+          <button className="btn" onClick={() => navigate('/interrogate')}>{t('Home.interrogateButton')}</button>
+          <button className="btn" onClick={() => navigate('/search')}>{t('Home.searchButton')}</button>
+          <button className="btn" onClick={() => navigate('/shop')}>{t('Home.shopButton')}</button>
+          <button className="btn" onClick={() => navigate('/pensieve')}>{t('Home.pensieveButton')}</button>
         </div>
       )}
     </div>
