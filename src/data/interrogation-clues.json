@@ -1,3 +1,62 @@
 [
-  { "id": 1, "question": "Où étiez-vous à 21h ?", "answer": "Dans la bibliothèque." }
+  {
+    "id": 1,
+    "location": "Salon",
+    "npc": "Professeur Reeves",
+    "level": 1,
+    "clue": "Le professeur Reeves semblait nerveux à 21h.",
+    "start_phase": 1,
+    "end_phase": 4,
+    "condition": ""
+  },
+  {
+    "id": 2,
+    "location": "Salon",
+    "npc": "Professeur Reeves",
+    "level": 2,
+    "clue": "Il a vu quelqu'un passer discrètement par la porte de service.",
+    "start_phase": 2,
+    "end_phase": 4,
+    "condition": "library_opened=1"
+  },
+  {
+    "id": 3,
+    "location": "Bibliothèque",
+    "npc": "Madame Leblanc",
+    "level": 1,
+    "clue": "Madame Leblanc rangeait des livres à 21h.",
+    "start_phase": 1,
+    "end_phase": 3,
+    "condition": ""
+  },
+  {
+    "id": 4,
+    "location": "Bibliothèque",
+    "npc": "Madame Leblanc",
+    "level": 2,
+    "clue": "Elle a entendu un bruit sourd derrière l'étagère.",
+    "start_phase": 2,
+    "end_phase": 3,
+    "condition": "secret_passage_found=1"
+  },
+  {
+    "id": 5,
+    "location": "Cuisine",
+    "npc": "Monsieur Dubois",
+    "level": 1,
+    "clue": "Monsieur Dubois préparait le dessert.",
+    "start_phase": 1,
+    "end_phase": 4,
+    "condition": ""
+  },
+  {
+    "id": 6,
+    "location": "Cuisine",
+    "npc": "Monsieur Dubois",
+    "level": 2,
+    "clue": "Il a trouvé un objet étrange sous la table.",
+    "start_phase": 3,
+    "end_phase": 4,
+    "condition": "npc_confessed=1"
+  }
 ]

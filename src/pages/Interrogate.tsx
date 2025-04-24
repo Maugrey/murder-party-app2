@@ -1,26 +1,158 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
+import cluesData from '../data/interrogation-clues.json';
+
+// Adapter la structure Clue au format specs.md
+interface Clue {
+  id: number;
+  location: string;
+  npc: string;
+  level: number;
+  clue: string;
+  start_phase: number;
+  end_phase: number;
+  condition: string;
+}
 
 const Interrogate = () => {
   const { t } = useTranslation();
   const isGameStarted = useGlobalStore((s) => s.isGameStarted);
+  const currentPhase = useGlobalStore((s) => s.currentPhase);
+  const conditions = useGlobalStore((s) => s.conditions);
+  const cluesViewed = useGlobalStore((s) => s.cluesViewed);
+  const setCluesViewed = useGlobalStore((s) => s.setCluesViewed);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!isGameStarted) navigate('/');
   }, [isGameStarted, navigate]);
 
-  if (!isGameStarted) {
-    return <div className="text-center py-12 text-lg text-gray-500">{t('Common.notStarted')}</div>;
-  }
+  // Préparer les clues avec le bon typage
+  const clues: Clue[] = (cluesData as Clue[]);
+  // Liste des lieux disponibles pour la phase courante
+  const locations = Array.from(new Set(
+    clues.filter(c =>
+      (!c.start_phase || c.start_phase <= currentPhase) &&
+      (!c.end_phase || c.end_phase >= currentPhase)
+    ).map(c => c.location)
+  ));
+  const [selectedLocation, setSelectedLocation] = useState<string>('');
+  const [selectedNpc, setSelectedNpc] = useState<string>('');
+  const [showClue, setShowClue] = useState(false);
+  const [clueText, setClueText] = useState('');
+  const [alreadySeen, setAlreadySeen] = useState(false);
+
+  // Liste des PNJ disponibles pour le lieu et la phase/condition
+  const npcs = Array.from(new Set(
+    clues.filter((c) =>
+      c.location === selectedLocation &&
+      (!c.start_phase || c.start_phase <= currentPhase) &&
+      (!c.end_phase || c.end_phase >= currentPhase) &&
+      (!c.condition || (() => {
+        const [condKey, condVal] = c.condition.split('=');
+        if (!condKey) return true;
+        return conditions[condKey] === (condVal === '1');
+      })())
+    ).map((c) => c.npc)
+  ));
+
+  // Calcul du niveau max pour ce couple lieu/PNJ
+  const maxLevel = Math.max(
+    ...clues.filter((c) => c.location === selectedLocation && c.npc === selectedNpc).map((c) => c.level),
+    1
+  );
+
+  useEffect(() => {
+    // Ne pas reset showClue lorsque seul cluesViewed change
+    if (selectedLocation || selectedNpc) {
+      setShowClue(false);
+      setClueText('');
+      setAlreadySeen(false);
+      if (selectedLocation && selectedNpc) {
+        // Check if all levels have been seen
+        let allSeen = true;
+        for (let lvl = 1; lvl <= maxLevel; lvl++) {
+          const key = `${selectedLocation}|${selectedNpc}|${lvl}`;
+          if (!cluesViewed[key]) allSeen = false;
+        }
+        setAlreadySeen(allSeen);
+      }
+    }
+  }, [selectedLocation, selectedNpc, maxLevel]); // Retiré cluesViewed des dépendances
+
+  // Affichage de l'indice selon le prochain niveau non vu
+  const handleInterrogate = () => {
+    // Find next unseen level
+    let levelToShow = 1;
+    for (let lvl = 1; lvl <= maxLevel; lvl++) {
+      const key = `${selectedLocation}|${selectedNpc}|${lvl}`;
+      if (!cluesViewed[key]) {
+        levelToShow = lvl;
+        break;
+      }
+      if (lvl === maxLevel) levelToShow = maxLevel;
+    }
+    
+    const clue = clues.find(
+      (c) => c.location === selectedLocation && c.npc === selectedNpc && c.level === levelToShow
+    );
+    
+    if (!clue) {
+      setClueText(t('Interrogate.noClue'));
+    } else {
+      setClueText(clue.clue);
+    }
+    
+    setShowClue(true);
+    // Marquer comme vu
+    const key = `${selectedLocation}|${selectedNpc}|${levelToShow}`;
+    setCluesViewed({ ...cluesViewed, [key]: true });
+  };
 
   return (
     <div className="max-w-xl mx-auto py-8">
       <h2 className="text-2xl font-bold mb-6">{t('Interrogate.title')}</h2>
-      {/* TODO: Dropdown lieu, dropdown PNJ, bouton interroger, affichage indice, gestion état */}
-      <div className="text-gray-400">{t('Common.todo')}</div>
+      <div className="flex flex-col gap-4 mb-6">
+        <select
+          className="p-2 border rounded"
+          value={selectedLocation}
+          onChange={e => { setSelectedLocation(e.target.value); setSelectedNpc(''); }}
+        >
+          <option value="">{t('Interrogate.selectLocation')}</option>
+          {locations.map(loc => (
+            <option key={loc} value={loc}>{loc}</option>
+          ))}
+        </select>
+        <select
+          className="p-2 border rounded"
+          value={selectedNpc}
+          onChange={e => setSelectedNpc(e.target.value)}
+          disabled={!selectedLocation}
+        >
+          <option value="">{t('Interrogate.selectNpc')}</option>
+          {npcs.map(npc => (
+            <option key={npc} value={npc}>{npc}</option>
+          ))}
+        </select>
+        <button
+          className="p-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+          disabled={!selectedLocation || !selectedNpc}
+          onClick={handleInterrogate}
+        >
+          {t('Interrogate.button')}
+        </button>
+        {alreadySeen && (
+          <div className="text-yellow-600 text-sm">{t('Interrogate.alreadySeen')}</div>
+        )}
+      </div>
+      
+      {showClue && (
+        <div className="bg-gray-100 rounded p-4 shadow text-center text-lg mt-4">
+          {clueText}
+        </div>
+      )}
     </div>
   );
 };
