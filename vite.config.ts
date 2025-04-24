@@ -1,7 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import postcss from 'postcss';
+import tailwindcss from '@tailwindcss/postcss7-compat';
+import React from '@vitejs/plugin-react';
+// Ajout d'une déclaration pour le module manquant
+declare module '@tailwindcss/postcss7-compat';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  plugins: [React()],
+  css: {
+    postcss: {
+      plugins: [postcss(), tailwindcss()],
+    },
+  },
+});
