@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
 import { useEffect, useState } from 'react';
 import conditionsData from '../data/conditions.json';
+import { useNavigate } from 'react-router-dom';
 
 interface ConditionDef {
   id: number;
@@ -18,10 +19,16 @@ const Admin = () => {
   const setConditions = useGlobalStore((s) => s.setConditions);
   const conditions = useGlobalStore((s) => s.conditions);
   const [conditionDefs, setConditionDefs] = useState<ConditionDef[]>([]);
+  const isGameStarted = useGlobalStore((s) => s.isGameStarted);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setConditionDefs(conditionsData as ConditionDef[]);
   }, []);
+
+  useEffect(() => {
+    if (!isGameStarted) navigate('/');
+  }, [isGameStarted, navigate]);
 
   const handleConditionToggle = (key: string) => {
     setConditions({ ...conditions, [key]: !conditions[key] });

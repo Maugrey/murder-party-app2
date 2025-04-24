@@ -1,9 +1,16 @@
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
   const { t } = useTranslation();
   const isGameStarted = useGlobalStore((s) => s.isGameStarted);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isGameStarted) navigate('/');
+  }, [isGameStarted, navigate]);
 
   if (!isGameStarted) {
     return <div className="text-center py-12 text-lg text-gray-500">{t('Common.notStarted')}</div>;
