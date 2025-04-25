@@ -21,30 +21,7 @@
     "resetButton": "Reset",
     "nextPhaseButton": "Next Phase",
     "prevPhaseButton": "Previous Phase",
-    "conditionsSection": "Conditions"
-  },
-  "Timer": {
-    "totalTime": "Total Time: {{time}}",
-    "phaseTime": "Phase Time: {{time}}",
-    "phase": "Phase: {{phase}}"
-  },
-  "Search": {
-    "title": "Search",
-    "selectLocation": "Select a location",
-    "selectPlace": "Select a place to search",
-    "searchButton": "Search",
-    "keepItemButton": "Keep the clue",
-    "noClue": "No clue found at this location.",
-    "itemAlreadyTaken": "Something has been removed from here.",
-    "itemKept": "You have kept this item."
-  },
-  "Interrogate": {
-    "title": "Interrogate",
-    "selectLocation": "Select a location",
-    "selectNpc": "Select an NPC",
-    "interrogateButton": "Interrogate",
-    "alreadySeen": "You have already obtained all clues from this person.",
-    "noClue": "This person has nothing to tell you."
+    "conditionsSectionTitle": "Conditions"
   },
   "Pensieve": {
     "title": "Pensieve",
@@ -63,7 +40,6 @@
     "on": "On",
     "off": "Off",
     "notStarted": "The game has not started.",
-    "todo": "To do",
-    "loading": "Loading..."
+    "todo": "To do"
   }
 }
