@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
 import pensieveMemoriesData from '../data/pensieve-memories.json';
+import { DevOnly } from '../utils/devTools';
 
 // Interface pour les données de souvenirs de la pensine
 interface PensieveMemory {
@@ -161,6 +162,9 @@ const Pensieve = () => {
             </div>
           )}
           <p className="mb-4">{memoryText}</p>
+          <DevOnly>
+            <p className="mb-4">{getMemoryTypeText(memoryType)}</p>
+          </DevOnly>
         </div>
       )}
     </div>
