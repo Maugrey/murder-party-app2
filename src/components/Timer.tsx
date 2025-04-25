@@ -25,11 +25,9 @@ const Timer = () => {
   const elapsedPhase = phaseStartTime ? now - phaseStartTime : 0;
 
   return (
-    <div className="flex flex-col md:flex-row gap-1 md:gap-4 items-center text-xs md:text-sm">
+    <div className="flex flex-row gap-1 md:gap-4 items-center text-xs md:text-sm">
       <span className="font-semibold">{t('Timer.phase', { phase: currentPhase })}</span>
-      -
       <span>{t('Timer.totalTime', { time: formatTime(elapsedGame) })}</span>
-      -
       <span>{t('Timer.phaseTime', { time: formatTime(elapsedPhase) })}</span>
     </div>
   );

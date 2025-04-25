@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './App.css';
@@ -14,27 +14,53 @@ import Timer from './components/Timer.tsx';
 
 function App() {
   const { t } = useTranslation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
         {/* Sticky menu */}
-        <header className="sticky top-0 z-10 bg-white shadow flex items-center justify-between px-4 py-2">
-          <nav className="flex-1 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link to="/" className="font-bold text-lg">MurderPartyApp</Link>
-              <div className="hidden md:flex gap-4">
-                <Link to="/interrogate">{t('App.interrogate')}</Link>
-                <Link to="/search">{t('App.search')}</Link>
-                <Link to="/pensieve">{t('App.pensieve')}</Link>
-                <Link to="/shop">{t('App.shop')}</Link>
-                <Link to="/admin">{t('App.admin')}</Link>
-              </div>
+        <header className="sticky top-0 z-10 bg-white shadow px-4 py-2 flex flex-col">
+          <nav className="flex items-center w-full gap-4">
+            {/* Burger menu for mobile */}
+            <div 
+              className="md:hidden cursor-pointer" 
+              onClick={toggleMobileMenu}
+            >
+              ☰
             </div>
-            {/* Burger menu for mobile (non-fonctionnel, à compléter plus tard) */}
-            <div className="md:hidden">☰</div>
+            <div className="flex-1 flex justify-center">
+              <Link to="/" className="font-bold text-lg">MurderPartyApp</Link>
+            </div>
+            <div className="hidden md:flex gap-4">
+              <Link to="/interrogate">{t('App.interrogate')}</Link>
+              <Link to="/search">{t('App.search')}</Link>
+              <Link to="/pensieve">{t('App.pensieve')}</Link>
+              <Link to="/shop">{t('App.shop')}</Link>
+              <Link to="/admin">{t('App.admin')}</Link>
+            </div>
           </nav>
-          <Timer />
+          
+          {/* Menu mobile avec animation */}
+          <div className={`md:hidden flex flex-col gap-2 overflow-hidden transition-all duration-300 ease-in-out
+            ${mobileMenuOpen 
+              ? 'max-h-60 opacity-100 mt-2 pb-2 pt-2 border-t' 
+              : 'max-h-0 opacity-0 m-0 p-0 border-t-0'}`}
+          >
+            <Link to="/interrogate" className="text-center" onClick={toggleMobileMenu}>{t('App.interrogate')}</Link>
+            <Link to="/search" className="text-center" onClick={toggleMobileMenu}>{t('App.search')}</Link>
+            <Link to="/pensieve" className="text-center" onClick={toggleMobileMenu}>{t('App.pensieve')}</Link>
+            <Link to="/shop" className="text-center" onClick={toggleMobileMenu}>{t('App.shop')}</Link>
+            <Link to="/admin" className="text-center" onClick={toggleMobileMenu}>{t('App.admin')}</Link>
+          </div>
+          
+          <div className="flex justify-center mt-2">
+            <Timer />
+          </div>
         </header>
         {/* Main content */}
         <main className="flex-1 p-4">
