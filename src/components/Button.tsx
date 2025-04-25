@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button 
-      className={`${baseClasses} ${variantClasses[variant]} ${className}`} 
+      className={`${baseClasses} ${variantClasses[variant]} ${props.disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`} 
       {...props}
     >
       {children}

@@ -3,6 +3,8 @@ import { useGlobalStore } from '../stores/globalStore';
 import { useEffect, useState } from 'react';
 import conditionsData from '../data/conditions.json';
 import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button';
+import Toggle from '../components/Toggle';
 
 interface ConditionDef {
   id: number;
@@ -59,9 +61,9 @@ const Admin = () => {
     <div className="max-w-xl mx-auto py-8">
       <h2 className="text-2xl font-bold mb-6">{t('Admin.title')}</h2>
       <div className="flex gap-4 mb-8">
-        <button className="btn bg-red-600 text-white" onClick={handleReset}>{t('Admin.resetButton')}</button>
-        <button className="btn" onClick={handlePrevPhase}>{t('Admin.prevPhaseButton')}</button>
-        <button className="btn" onClick={handleNextPhase}>{t('Admin.nextPhaseButton')}</button>
+        <Button variant="danger" onClick={handleReset}>{t('Admin.resetButton')}</Button>
+        <Button onClick={handlePrevPhase}>{t('Admin.prevPhaseButton')}</Button>
+        <Button onClick={handleNextPhase}>{t('Admin.nextPhaseButton')}</Button>
       </div>
       <div className="mb-6">
         <h3 className="font-semibold mb-2">{t('Admin.conditionsSection')}</h3>
@@ -69,16 +71,11 @@ const Admin = () => {
           {conditionDefs.map((cond) => (
             <li key={cond.id} className="flex items-center gap-4">
               <span className="flex-1">{cond.label}</span>
-              <label className="inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="sr-only peer"
-                  checked={!!conditions[cond.id]}
-                  onChange={() => handleConditionToggle(String(cond.id))}
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:bg-blue-600 transition"></div>
-                <span className="ml-2 text-sm">{conditions[cond.id] ? t('Common.on') : t('Common.off')}</span>
-              </label>
+              <Toggle
+                checked={!!conditions[cond.id]}
+                onChange={() => handleConditionToggle(String(cond.id))}
+                label={conditions[cond.id] ? t('Common.on') : t('Common.off')}
+              />
             </li>
           ))}
         </ul>

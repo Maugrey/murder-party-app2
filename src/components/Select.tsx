@@ -21,7 +21,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   return (
     <select
-      className={`p-2 border rounded ${className}`}
+      className={`p-2 border rounded ${disabled ? 'bg-gray-200 cursor-not-allowed' : ''} ${className}`}
       value={value}
       onChange={onChange}
       disabled={disabled}
