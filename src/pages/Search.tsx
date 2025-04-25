@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
 import searchCluesData from '../data/search-clues.json';
+import Select from '../components/Select';
+import Button from '../components/Button';
 
 // Interface pour les données d'indices de recherche selon les specs
 interface SearchClue {
@@ -121,39 +123,30 @@ const Search = () => {
     <div className="max-w-xl mx-auto py-8">
       <h2 className="text-2xl font-bold mb-6">{t('Search.title')}</h2>
       <div className="flex flex-col gap-4 mb-6">
-        <select
-          className="p-2 border rounded"
+        <Select
+          options={locations.map(loc => ({ value: loc, label: loc }))}
+          placeholder={t('Search.selectLocation')}
           value={selectedLocation}
           onChange={e => {
             setSelectedLocation(e.target.value);
             setSelectedPlace('');
           }}
           title={t('Search.selectLocation')}
-        >
-          <option value="">{t('Search.selectLocation')}</option>
-          {locations.map(loc => (
-            <option key={loc} value={loc}>{loc}</option>
-          ))}
-        </select>
-        <select
-          className="p-2 border rounded"
+        />
+        <Select
+          options={places.map(place => ({ value: place, label: place }))}
+          placeholder={t('Search.selectPlace')}
           value={selectedPlace}
           onChange={e => setSelectedPlace(e.target.value)}
           disabled={!selectedLocation}
           title={t('Search.selectPlace')}
-        >
-          <option value="">{t('Search.selectPlace')}</option>
-          {places.map(place => (
-            <option key={place} value={place}>{place}</option>
-          ))}
-        </select>
-        <button
-          className="p-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+        />
+        <Button
           disabled={!selectedLocation || !selectedPlace}
           onClick={handleSearch}
         >
           {t('Search.searchButton')}
-        </button>
+        </Button>
       </div>
       
       {showClue && (
@@ -162,12 +155,13 @@ const Search = () => {
           
           {/* Afficher le bouton "Garder l'indice" uniquement pour les objets non pris */}
           {clueType === 'object' && !itemTaken && (
-            <button
-              className="mt-4 p-2 rounded bg-green-600 text-white hover:bg-green-700 transition"
+            <Button
+              variant="success"
+              className="mt-4"
               onClick={handleKeepItem}
             >
               {t('Search.keepItemButton')}
-            </button>
+            </Button>
           )}
         </div>
       )}

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
 import cluesData from '../data/interrogation-clues.json';
+import Select from '../components/Select';
+import Button from '../components/Button';
 
 // Adapter la structure Clue au format specs.md
 interface Clue {
@@ -115,36 +117,27 @@ const Interrogate = () => {
     <div className="max-w-xl mx-auto py-8">
       <h2 className="text-2xl font-bold mb-6">{t('Interrogate.title')}</h2>
       <div className="flex flex-col gap-4 mb-6">
-        <select
-          className="p-2 border rounded"
+        <Select
+          options={locations.map(loc => ({ value: loc, label: loc }))}
+          placeholder={t('Interrogate.selectLocation')}
           value={selectedLocation}
           onChange={e => { setSelectedLocation(e.target.value); setSelectedNpc(''); }}
           title={t('Interrogate.selectLocation')}
-        >
-          <option value="">{t('Interrogate.selectLocation')}</option>
-          {locations.map(loc => (
-            <option key={loc} value={loc}>{loc}</option>
-          ))}
-        </select>
-        <select
-          className="p-2 border rounded"
+        />
+        <Select
+          options={npcs.map(npc => ({ value: npc, label: npc }))}
+          placeholder={t('Interrogate.selectNpc')}
           value={selectedNpc}
           onChange={e => setSelectedNpc(e.target.value)}
           disabled={!selectedLocation}
           title={t('Interrogate.selectNpc')}
-        >
-          <option value="">{t('Interrogate.selectNpc')}</option>
-          {npcs.map(npc => (
-            <option key={npc} value={npc}>{npc}</option>
-          ))}
-        </select>
-        <button
-          className="p-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition"
+        />
+        <Button
           disabled={!selectedLocation || !selectedNpc}
           onClick={handleInterrogate}
         >
           {t('Interrogate.interrogateButton')}
-        </button>
+        </Button>
         {alreadySeen && (
           <div className="text-yellow-600 text-sm">{t('Interrogate.alreadySeen')}</div>
         )}

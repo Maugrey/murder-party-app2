@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
 import { useNavigate } from 'react-router-dom';
+import NavigationButton from '../components/NavigationButton';
+import Button from '../components/Button';
 
 const Home = () => {
   const { t } = useTranslation();
@@ -22,38 +24,30 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8">
       <h1 className="text-3xl font-bold mb-4">{t('Home.title')}</h1>
       {!isGameStarted ? (
-        <button
-          className="px-6 py-3 rounded bg-blue-600 text-white text-lg shadow hover:bg-blue-700 transition"
+        <Button
+          variant="primary"
+          className="px-6 py-3 text-lg shadow"
           onClick={handleStart}
         >
           {t('Home.startButton')}
-        </button>
+        </Button>
       ) : (
         <div className="flex flex-col gap-4 w-full max-w-xs">
-          <button 
-            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition" 
-            onClick={() => navigate('/interrogate')}
-          >
+          <NavigationButton to="/interrogate">
             {t('Home.interrogateButton')}
-          </button>
-          <button 
-            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition" 
-            onClick={() => navigate('/search')}
-          >
+          </NavigationButton>
+          
+          <NavigationButton to="/search">
             {t('Home.searchButton')}
-          </button>
-          <button 
-            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition" 
-            onClick={() => navigate('/shop')}
-          >
+          </NavigationButton>
+          
+          <NavigationButton to="/shop">
             {t('Home.shopButton')}
-          </button>
-          <button 
-            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 transition" 
-            onClick={() => navigate('/pensieve')}
-          >
+          </NavigationButton>
+          
+          <NavigationButton to="/pensieve">
             {t('Home.pensieveButton')}
-          </button>
+          </NavigationButton>
         </div>
       )}
     </div>
