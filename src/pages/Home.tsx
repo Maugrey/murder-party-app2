@@ -1,12 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
-import { useNavigate } from 'react-router-dom';
 import NavigationButton from '../components/NavigationButton';
 import Button from '../components/Button';
 
 const Home = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const isGameStarted = useGlobalStore((s) => s.isGameStarted);
   const setIsGameStarted = useGlobalStore((s) => s.setIsGameStarted);
   const setGameStartTime = useGlobalStore((s) => s.setGameStartTime);

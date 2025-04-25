@@ -44,7 +44,7 @@ function loadInitialState(): GlobalState {
   };
 }
 
-export const useGlobalStore = create<GlobalState>((set, get) => ({
+export const useGlobalStore = create<GlobalState>((set) => ({
   ...loadInitialState(),
   setIsGameStarted: (isGameStarted) => {
     set({ isGameStarted });
