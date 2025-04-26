@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
-import cluesData from '../data/interrogation-clues.json';
+import { getDataLoader, DataResource } from '../utils/dataLoader';
+import { useDataLoaderMode } from '../utils/dataLoaderContext';
 import Select from '../components/Select';
 import Button from '../components/Button';
 
@@ -26,13 +27,19 @@ const Interrogate = () => {
   const cluesViewed = useGlobalStore((s) => s.cluesViewed);
   const setCluesViewed = useGlobalStore((s) => s.setCluesViewed);
   const navigate = useNavigate();
+  const [clues, setClues] = useState<Clue[]>([]);
+
+  const dataLoaderMode = useDataLoaderMode();
+  const cluesDataLoader = getDataLoader<Clue[]>(dataLoaderMode);
 
   useEffect(() => {
     if (!isGameStarted) navigate('/');
   }, [isGameStarted, navigate]);
 
-  // Préparer les clues avec le bon typage
-  const clues: Clue[] = (cluesData as Clue[]);
+  useEffect(() => {
+    cluesDataLoader.load(DataResource.INTERROGATION).then(setClues);
+  }, []);
+
   // Liste des lieux disponibles pour la phase courante
   const locations = Array.from(new Set(
     clues.filter(c =>

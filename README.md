@@ -35,6 +35,20 @@ Base technique pour une application de murder party.
    npm run dev
    ```
 
+## Configuration de l'environnement
+
+Avant de lancer l'application, créez un fichier `.env` à la racine du projet avec la variable suivante :
+
+```
+VITE_DATA_LOADER_MODE=static
+```
+
+- `VITE_DATA_LOADER_MODE` permet de choisir la source de chargement des données :
+  - `static` : les données sont chargées depuis les fichiers JSON du dossier `public/data/`.
+  - `api` : les données sont chargées via des endpoints API (si disponibles).
+
+Le fichier `.env` est ignoré par git pour permettre à chaque développeur d'utiliser sa propre configuration locale.
+
 ## À venir
 - Composants métier et logique de jeu
 - Intégration API (optionnelle)

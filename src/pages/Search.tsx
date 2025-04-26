@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
-import searchCluesData from '../data/search-clues.json';
+import { getDataLoader, DataResource } from '../utils/dataLoader';
+import { useDataLoaderMode } from '../utils/dataLoaderContext';
 import Select from '../components/Select';
 import Button from '../components/Button';
 
@@ -32,9 +33,6 @@ const Search = () => {
     if (!isGameStarted) navigate('/');
   }, [isGameStarted, navigate]);
 
-  // Préparer les clues avec le bon typage
-  const clues: SearchClue[] = (searchCluesData as SearchClue[]);
-
   // États locaux pour la sélection et l'affichage
   const [selectedLocation, setSelectedLocation] = useState<string>('');
   const [selectedPlace, setSelectedPlace] = useState<string>('');
@@ -42,6 +40,14 @@ const Search = () => {
   const [clueText, setClueText] = useState('');
   const [clueType, setClueType] = useState<'object' | 'observation' | ''>('');
   const [itemTaken, setItemTaken] = useState(false);
+  const [clues, setClues] = useState<SearchClue[]>([]);
+
+  const dataLoaderMode = useDataLoaderMode();
+  const searchCluesDataLoader = getDataLoader<SearchClue[]>(dataLoaderMode);
+
+  useEffect(() => {
+    searchCluesDataLoader.load(DataResource.SEARCH).then(setClues);
+  }, []);
 
   // Liste des lieux disponibles pour la phase courante
   const locations = Array.from(new Set(

@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
-import pensieveMemoriesData from '../data/pensieve-memories.json';
+import { getDataLoader, DataResource } from '../utils/dataLoader';
+import { useDataLoaderMode } from '../utils/dataLoaderContext';
 import { DevOnly } from '../utils/devTools';
 
 // Interface pour les données de souvenirs de la pensine
@@ -23,20 +24,24 @@ const Pensieve = () => {
   const memoriesShown = useGlobalStore((s) => s.memoriesShown);
   const setMemoriesShown = useGlobalStore((s) => s.setMemoriesShown);
   const navigate = useNavigate();
+  const dataLoaderMode = useDataLoaderMode();
+  const pensieveDataLoader = getDataLoader<PensieveMemory[]>(dataLoaderMode);
 
   // Rediriger vers l'accueil si la partie n'a pas commencé
   useEffect(() => {
     if (!isGameStarted) navigate('/');
   }, [isGameStarted, navigate]);
 
-  // Préparer les souvenirs avec le bon typage
-  const memories: PensieveMemory[] = (pensieveMemoriesData as PensieveMemory[]);
-
   // États locaux pour l'affichage
   const [showMemory, setShowMemory] = useState(false);
   const [memoryText, setMemoryText] = useState('');
   const [memoryType, setMemoryType] = useState<'clue' | 'false-lead' | 'useless' | ''>('');
   const [memoryLocation, setMemoryLocation] = useState('');
+  const [memories, setMemories] = useState<PensieveMemory[]>([]);
+
+  useEffect(() => {
+    pensieveDataLoader.load(DataResource.PENSIEVE).then(setMemories);
+  }, []);
 
   // Fonction utilitaire pour choisir un type de souvenir selon la phase
   const pickMemoryTypeForPhase = (phase: number): 'clue' | 'false-lead' | 'useless' => {

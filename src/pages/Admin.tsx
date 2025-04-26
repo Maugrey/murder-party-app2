@@ -1,10 +1,11 @@
+import { getDataLoader, DataResource } from '../utils/dataLoader';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
 import { useEffect, useState } from 'react';
-import conditionsData from '../data/conditions.json';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Toggle from '../components/Toggle';
+import { useDataLoaderMode } from '../utils/dataLoaderContext';
 
 interface ConditionDef {
   id: number;
@@ -23,9 +24,11 @@ const Admin = () => {
   const [conditionDefs, setConditionDefs] = useState<ConditionDef[]>([]);
   const isGameStarted = useGlobalStore((s) => s.isGameStarted);
   const navigate = useNavigate();
+  const dataLoaderMode = useDataLoaderMode();
+  const conditionsDataLoader = getDataLoader<ConditionDef[]>(dataLoaderMode);
 
   useEffect(() => {
-    setConditionDefs(conditionsData as ConditionDef[]);
+    conditionsDataLoader.load(DataResource.CONDITIONS).then(setConditionDefs);
   }, []);
 
   useEffect(() => {
