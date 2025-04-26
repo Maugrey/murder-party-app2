@@ -38,15 +38,20 @@ export class StaticJsonDataLoader<T> implements DataLoader<T> {
 }
 
 export class ApiDataLoader<T> implements DataLoader<T> {
+  private apiBaseUrl: string;
+  constructor(apiBaseUrl?: string) {
+    // Use env variable or default to '/api'
+    this.apiBaseUrl = apiBaseUrl || import.meta.env.VITE_API_BASE_URL || '/api';
+  }
   async load(resource: DataResource): Promise<T> {
     const endpoint = apiResourceToEndpoint[resource];
-    const response = await fetch(`/api/${endpoint}`);
+    const response = await fetch(`${this.apiBaseUrl}/${endpoint}`);
     if (!response.ok) throw new Error(`Erreur API: ${endpoint}`);
     return response.json();
   }
 }
 
-export function getDataLoader<T>(mode: DataLoaderMode): DataLoader<T> {
-  if (mode === 'api') return new ApiDataLoader<T>();
+export function getDataLoader<T>(mode: DataLoaderMode, apiBaseUrl?: string): DataLoader<T> {
+  if (mode === 'api') return new ApiDataLoader<T>(apiBaseUrl);
   return new StaticJsonDataLoader<T>();
 }

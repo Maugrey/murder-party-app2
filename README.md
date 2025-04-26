@@ -37,15 +37,17 @@ Base technique pour une application de murder party.
 
 ## Configuration de l'environnement
 
-Avant de lancer l'application, créez un fichier `.env` à la racine du projet avec la variable suivante :
+Avant de lancer l'application, créez un fichier `.env` à la racine du projet avec les variables suivantes :
 
 ```
 VITE_DATA_LOADER_MODE=static
+VITE_API_BASE_URL=/api
 ```
 
 - `VITE_DATA_LOADER_MODE` permet de choisir la source de chargement des données :
   - `static` : les données sont chargées depuis les fichiers JSON du dossier `public/data/`.
   - `api` : les données sont chargées via des endpoints API (si disponibles).
+- `VITE_API_BASE_URL` permet de paramétrer l'URL de base de l'API utilisée pour charger les fichiers JSON en mode API. Par défaut `/api`, mais vous pouvez la remplacer par l'URL de votre backend (ex : `http://localhost:3000/api`).
 
 Le fichier `.env` est ignoré par git pour permettre à chaque développeur d'utiliser sa propre configuration locale.
 
