@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useGlobalStore } from '../stores/globalStore';
+import { useGameState } from '../hooks/useGameState';
 import { getDataLoader, DataResource } from '../utils/dataLoader';
 import { useDataLoaderMode } from '../utils/dataLoaderContext';
 import Select from '../components/Select';
@@ -21,11 +21,13 @@ interface SearchClue {
 
 const Search = () => {
   const { t } = useTranslation();
-  const isGameStarted = useGlobalStore((s) => s.isGameStarted);
-  const currentPhase = useGlobalStore((s) => s.currentPhase);
-  const conditions = useGlobalStore((s) => s.conditions);
-  const itemsTaken = useGlobalStore((s) => s.itemsTaken);
-  const setItemsTaken = useGlobalStore((s) => s.setItemsTaken);
+  const {
+    isGameStarted,
+    currentPhase,
+    conditions,
+    itemsTaken,
+    setItemsTaken
+  } = useGameState();
   const navigate = useNavigate();
 
   // Rediriger vers l'accueil si la partie n'a pas commencé

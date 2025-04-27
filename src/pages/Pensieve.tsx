@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useGlobalStore } from '../stores/globalStore';
+import { useGameState } from '../hooks/useGameState';
 import { getDataLoader, DataResource } from '../utils/dataLoader';
 import { useDataLoaderMode } from '../utils/dataLoaderContext';
 import { DevOnly } from '../utils/devTools';
@@ -18,11 +18,13 @@ interface PensieveMemory {
 
 const Pensieve = () => {
   const { t } = useTranslation();
-  const isGameStarted = useGlobalStore((s) => s.isGameStarted);
-  const currentPhase = useGlobalStore((s) => s.currentPhase);
-  const conditions = useGlobalStore((s) => s.conditions);
-  const memoriesShown = useGlobalStore((s) => s.memoriesShown);
-  const setMemoriesShown = useGlobalStore((s) => s.setMemoriesShown);
+  const {
+    isGameStarted,
+    currentPhase,
+    conditions,
+    memoriesShown,
+    setMemoriesShown
+  } = useGameState();
   const navigate = useNavigate();
   const dataLoaderMode = useDataLoaderMode();
   const pensieveDataLoader = getDataLoader<PensieveMemory[]>(dataLoaderMode);

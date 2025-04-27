@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useGlobalStore } from '../stores/globalStore';
+import { useGameState } from '../hooks/useGameState';
 import { getDataLoader, DataResource } from '../utils/dataLoader';
 import { useDataLoaderMode } from '../utils/dataLoaderContext';
 import Select from '../components/Select';
@@ -21,11 +21,13 @@ interface Clue {
 
 const Interrogate = () => {
   const { t } = useTranslation();
-  const isGameStarted = useGlobalStore((s) => s.isGameStarted);
-  const currentPhase = useGlobalStore((s) => s.currentPhase);
-  const conditions = useGlobalStore((s) => s.conditions);
-  const cluesViewed = useGlobalStore((s) => s.cluesViewed);
-  const setCluesViewed = useGlobalStore((s) => s.setCluesViewed);
+  const {
+    isGameStarted,
+    currentPhase,
+    conditions,
+    cluesViewed,
+    setCluesViewed
+  } = useGameState();
   const navigate = useNavigate();
   const [clues, setClues] = useState<Clue[]>([]);
 

@@ -1,15 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { useGlobalStore } from '../stores/globalStore';
+import { useGameState } from '../hooks/useGameState';
 import NavigationButton from '../components/NavigationButton';
 import Button from '../components/Button';
 
 const Home = () => {
   const { t } = useTranslation();
-  const isGameStarted = useGlobalStore((s) => s.isGameStarted);
-  const setIsGameStarted = useGlobalStore((s) => s.setIsGameStarted);
-  const setGameStartTime = useGlobalStore((s) => s.setGameStartTime);
-  const setPhaseStartTime = useGlobalStore((s) => s.setPhaseStartTime);
-  const setCurrentPhase = useGlobalStore((s) => s.setCurrentPhase);
+  const { isGameStarted, setIsGameStarted, setGameStartTime, setPhaseStartTime, setCurrentPhase } = useGameState();
 
   const handleStart = () => {
     setIsGameStarted(true);

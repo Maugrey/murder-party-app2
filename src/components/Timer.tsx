@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useGlobalStore } from '../stores/globalStore';
 import { useTranslation } from 'react-i18next';
+import { useGameState } from '../hooks/useGameState';
 
 function formatTime(ms: number) {
   const totalSeconds = Math.floor(ms / 1000);
@@ -11,9 +11,7 @@ function formatTime(ms: number) {
 
 const Timer = () => {
   const { t } = useTranslation();
-  const currentPhase = useGlobalStore((s) => s.currentPhase);
-  const gameStartTime = useGlobalStore((s) => s.gameStartTime);
-  const phaseStartTime = useGlobalStore((s) => s.phaseStartTime);
+  const { currentPhase, gameStartTime, phaseStartTime } = useGameState();
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {

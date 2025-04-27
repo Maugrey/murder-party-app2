@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useGlobalStore } from '../stores/globalStore';
+import { useGameState } from '../hooks/useGameState';
 
 const Shop = () => {
   const { t } = useTranslation();
-  const isGameStarted = useGlobalStore((s) => s.isGameStarted);
+  const { isGameStarted } = useGameState();
   const navigate = useNavigate();
 
   useEffect(() => {

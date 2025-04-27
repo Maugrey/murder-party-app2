@@ -1,11 +1,11 @@
 import { getDataLoader, DataResource } from '../utils/dataLoader';
 import { useTranslation } from 'react-i18next';
-import { useGlobalStore } from '../stores/globalStore';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import Toggle from '../components/Toggle';
 import { useDataLoaderMode } from '../utils/dataLoaderContext';
+import { useGameState } from '../hooks/useGameState';
 
 interface ConditionDef {
   id: number;
@@ -14,18 +14,23 @@ interface ConditionDef {
 
 const Admin = () => {
   const { t } = useTranslation();
-  const setIsGameStarted = useGlobalStore((s) => s.setIsGameStarted);
-  const setCurrentPhase = useGlobalStore((s) => s.setCurrentPhase);
-  const setGameStartTime = useGlobalStore((s) => s.setGameStartTime);
-  const setPhaseStartTime = useGlobalStore((s) => s.setPhaseStartTime);
-  const currentPhase = useGlobalStore((s) => s.currentPhase);
-  const setConditions = useGlobalStore((s) => s.setConditions);
-  const conditions = useGlobalStore((s) => s.conditions);
-  const [conditionDefs, setConditionDefs] = useState<ConditionDef[]>([]);
-  const isGameStarted = useGlobalStore((s) => s.isGameStarted);
+  const {
+    setIsGameStarted,
+    setCurrentPhase,
+    setGameStartTime,
+    setPhaseStartTime,
+    setConditions,
+    conditions,
+    currentPhase,
+    isGameStarted,
+    setCluesViewed,
+    setItemsTaken,
+    setMemoriesShown
+  } = useGameState();
   const navigate = useNavigate();
   const dataLoaderMode = useDataLoaderMode();
   const conditionsDataLoader = getDataLoader<ConditionDef[]>(dataLoaderMode);
+  const [conditionDefs, setConditionDefs] = useState<ConditionDef[]>([]);
 
   useEffect(() => {
     conditionsDataLoader.load(DataResource.CONDITIONS).then(setConditionDefs);
@@ -45,9 +50,9 @@ const Admin = () => {
     setGameStartTime(0);
     setPhaseStartTime(0);
     setConditions({});
-    useGlobalStore.getState().setCluesViewed({});
-    useGlobalStore.getState().setItemsTaken({});
-    useGlobalStore.getState().setMemoriesShown([]);
+    setCluesViewed({});
+    setItemsTaken({});
+    setMemoriesShown([]);
   };
 
   const handleNextPhase = () => {
