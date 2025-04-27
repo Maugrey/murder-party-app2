@@ -41,7 +41,7 @@ export class ApiDataLoader<T> implements DataLoader<T> {
   private apiBaseUrl: string;
   constructor(apiBaseUrl?: string) {
     // Use env variable or default to '/api'
-    this.apiBaseUrl = apiBaseUrl || import.meta.env.VITE_API_BASE_URL || '/api';
+    this.apiBaseUrl = apiBaseUrl || import.meta.env.VITE_DATA_LOADER_API_BASE_URL || '/api';
   }
   async load(resource: DataResource): Promise<T> {
     const endpoint = apiResourceToEndpoint[resource];
