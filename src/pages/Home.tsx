@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';
 import NavigationButton from '../components/NavigationButton';

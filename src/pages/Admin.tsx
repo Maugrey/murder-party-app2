@@ -1,3 +1,4 @@
+import React from 'react';
 import { getDataLoader, DataResource } from '../utils/dataLoader';
 import { useTranslation } from 'react-i18next';
 import { useGlobalStore } from '../stores/globalStore';

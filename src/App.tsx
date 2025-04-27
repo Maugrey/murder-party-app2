@@ -1,15 +1,16 @@
+import React from 'react';
 import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './App.css';
 import './index.css';
 import './i18n';
-import Home from './pages/Home.tsx';
-import Interrogate from './pages/Interrogate.tsx';
-import Search from './pages/Search.tsx';
-import Pensieve from './pages/Pensieve.tsx';
-import Shop from './pages/Shop.tsx';
-import Admin from './pages/Admin.tsx';
+import Home from './pages/Home.js';
+import Interrogate from './pages/Interrogate.js';
+import Search from './pages/Search.js';
+import Pensieve from './pages/Pensieve.js';
+import Shop from './pages/Shop.js';
+import Admin from './pages/Admin.js';
 import Header from './components/Header';
 import { DataLoaderModeContext } from './utils/dataLoaderContext';
 
