@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": "node --loader ts-node/esm --watch app.ts",
+    "build:api": "npx tsc -p tsconfig.api.json",
+    "start:api": "node dist/app.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "tsc -b && vite build && vite preview",
@@ -13,6 +16,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",
     "autoprefixer": "^10.4.21",
+    "express": "^5.1.0",
     "i18next": "^25.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -23,6 +27,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@types/express": "^5.0.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
@@ -30,7 +35,9 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
-    "typescript": "~5.7.2",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.2"
   }
