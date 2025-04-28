@@ -24,7 +24,7 @@ router.put('/:key', (req: Request, res: Response, next: NextFunction) => {
   (async () => {
     try {
       const key = req.params.key;
-      const data = req.body.data;
+      const data = req.body;
       if (!key) {
         return res.status(400).json({ error: 'Missing key parameter' });
       }

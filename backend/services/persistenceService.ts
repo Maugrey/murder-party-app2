@@ -30,7 +30,7 @@ export async function setPersistence(key: string, data: any) {
     db.data[key] = data;
     await db.write();
     
-    console.log(`Successfully stored data for key "${key}"`);
+    console.log(`Successfully stored data for key "${key} : ${JSON.stringify(data)}"`);
     return true;
   } catch (error) {
     console.error(`Error setting persistence data for key "${key}":`, error);
