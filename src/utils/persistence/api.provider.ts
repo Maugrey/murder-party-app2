@@ -49,7 +49,7 @@ export class ApiStorageProvider implements PersistenceProvider {
   
   // Méthodes asynchrones pour travailler avec l'API
   async fetchItem<T>(key: string): Promise<T | null> {
-    const response = await fetch(`${this.options.baseUrl}/storage/${encodeURIComponent(key)}`, {
+    const response = await fetch(`${this.options.baseUrl}/persistence/${encodeURIComponent(key)}`, {
       method: 'GET',
       headers: this.getHeaders(),
     });
@@ -66,7 +66,7 @@ export class ApiStorageProvider implements PersistenceProvider {
   }
   
   async saveItem<T>(key: string, value: T): Promise<void> {
-    const response = await fetch(`${this.options.baseUrl}/storage/${encodeURIComponent(key)}`, {
+    const response = await fetch(`${this.options.baseUrl}/persistence/${encodeURIComponent(key)}`, {
       method: 'PUT',
       headers: this.getHeaders(),
       body: JSON.stringify(value)
@@ -78,7 +78,7 @@ export class ApiStorageProvider implements PersistenceProvider {
   }
   
   async deleteItem(key: string): Promise<void> {
-    const response = await fetch(`${this.options.baseUrl}/storage/${encodeURIComponent(key)}`, {
+    const response = await fetch(`${this.options.baseUrl}/persistence/${encodeURIComponent(key)}`, {
       method: 'DELETE',
       headers: this.getHeaders()
     });
