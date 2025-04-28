@@ -1,3 +1,3 @@
 export function getTestMessage(): string {
-  return 'Hello from test service!';
+  return 'Hello from test service!!';
 }
