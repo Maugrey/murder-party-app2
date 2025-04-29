@@ -6,5 +6,8 @@
     { "src": "/api/(.*)", "dest": "/api/index.ts" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/dist/$1" }
-  ]
+  ],
+  "env": {
+    "NODE_OPTIONS": "--experimental-modules"
+  }
 }

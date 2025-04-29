@@ -2,20 +2,16 @@ import { Low } from 'lowdb'
 import { JSONFile } from 'lowdb/node'
 import path from 'path'
 import fs from 'fs'
-import { fileURLToPath } from 'url'
 
 // Type de la structure de données (clé dynamique)
 type Data = {
   [key: string]: any
 }
 
-// Get directory path
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
 // Define database directory and file path
-const dbDir = path.join(__dirname, '..', 'data')
-const dbPath = path.join(dbDir, 'db.json')
+const dbDir = path.join(process.cwd(), '..', 'data')
+const dbPath = path.join(process.cwd(), 'backend', 'data', 'db.json');
+
 
 // Ensure database directory exists
 if (!fs.existsSync(dbDir)) {
