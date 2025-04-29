@@ -3,11 +3,9 @@
   "outputDirectory": "dist",
 
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.ts" },
     { "handle": "filesystem" },
-    { "src": "/api/test",        "dest": "backend/api/test.ts" },
-    { "src": "/api/persistence","dest": "backend/api/persistence.ts" },
-    { "src": "/api/(.*)",        "dest": "/api/index.ts" },
+    { "src": "/api/test",        "dest": "api/test.ts" },
+    { "src": "/api/persistence","dest": "api/persistence.ts" },
     { "src": "/(.*)", "dest": "/dist/$1" }
   ],
   "env": {
