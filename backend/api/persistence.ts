@@ -12,7 +12,7 @@ router.get('/:key', (req: Request, res: Response, next: NextFunction) => {
         return res.status(400).json({ error: 'Missing key parameter' });
       }
       const data = await getPersistence(key);
-      res.json({ data });
+      res.json(data); // Modification: renvoi direct des données, sans les envelopper
     } catch (err) {
       next(err);
     }

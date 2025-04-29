@@ -23,7 +23,8 @@ export class ApiStorageProvider implements AsyncPersistenceProvider {
       }
 
       const result = await response.json();
-      return result.data as StorageValue<T>;
+      // L'API renvoie maintenant directement les données au format StorageValue
+      return result as StorageValue<T>;
     } catch (err) {
       console.error(`Error fetching item ${key} from API:`, err);
       return null;
@@ -35,7 +36,7 @@ export class ApiStorageProvider implements AsyncPersistenceProvider {
       const response = await fetch(`${this.options.baseUrl}/persistence/${encodeURIComponent(key)}`, {
         method: 'PUT',
         headers: this.getHeaders(),
-        body: JSON.stringify({ data: value })
+        body: JSON.stringify(value) // Envoi direct de value sans l'envelopper
       });
 
       if (!response.ok) {

@@ -1,12 +1,15 @@
 {
   "murderparty-global": {
-    "isGameStarted": true,
-    "currentPhase": 1,
-    "gameStartTime": 1745870338640,
-    "phaseStartTime": 1745870338641,
-    "conditions": {},
-    "cluesViewed": {},
-    "itemsTaken": {},
-    "memoriesShown": []
+    "state": {
+      "isGameStarted": true,
+      "currentPhase": 1,
+      "gameStartTime": 1745870338640,
+      "phaseStartTime": 1745870338641,
+      "conditions": {},
+      "cluesViewed": {},
+      "itemsTaken": {},
+      "memoriesShown": []
+    },
+    "version": 0
   }
 }
