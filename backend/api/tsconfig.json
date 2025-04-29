@@ -1,0 +1,5 @@
+// backend/api/tsconfig.json
+{
+    "extends": "../tsconfig.api.json"
+  }
+  
