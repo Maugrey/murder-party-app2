@@ -4,8 +4,8 @@
 
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/api/test",        "dest": "api/test.ts" },
-    { "src": "/api/persistence","dest": "api/persistence.ts" },
+    { "src": "/api/test",        "dest": "/api/test.ts" },
+    { "src": "/api/persistence","dest": "/api/persistence.ts" },
     { "src": "/(.*)", "dest": "/dist/$1" }
   ],
   "env": {
