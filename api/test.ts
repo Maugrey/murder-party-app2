@@ -1,7 +1,6 @@
-import { Request, Response } from 'express';
 import { getTestMessage } from '../backend/services/testService.js';
 
 
-export default function(req: Request, res: Response)  {
+export default function(req, res)  {
   res.json({ message: getTestMessage() });
 }
